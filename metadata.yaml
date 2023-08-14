@@ -1,5 +1,5 @@
 homepage: "https://www.gravito.net"
 documentation: "https://www.gravito.net/docs/lightcmp/gtm-template/"
 versions:
-  - sha: 9551b595e9939e96977dd0afc770f3b40bd0a549
+  - sha: 139f6c2de4550164b5c4ee7b6c65c4f006958b44
     changeNotes: Initial release.
