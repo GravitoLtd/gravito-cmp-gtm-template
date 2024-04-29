@@ -13,7 +13,10 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Gravito CMP",
-  "categories": ["ADVERTISING","TAG_MANAGEMENT"],
+  "categories": [
+    "ADVERTISING",
+    "TAG_MANAGEMENT"
+  ],
   "brand": {
     "id": "github.com_GravitoLtd",
     "displayName": "gravito-ltd-cmp-template",
@@ -32,7 +35,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "TEXT",
     "name": "gravitoconfigtoken",
-    "displayName": "",
+    "displayName": "Configuration token generated from Gravito portal.",
     "simpleValueType": true
   }
 ]
@@ -83,10 +86,13 @@ const gravitoCurrentState = (currentState) => {
     var functionalityConsent = getConsentLevel(currentState.consentState, currentState.config.core.functionalityConsentId?currentState.config.core.functionalityConsentId:0);
     var personalizationConsent = getConsentLevel(currentState.consentState, currentState.config.core.personalizationConsentId?currentState.config.core.personalizationConsentId:0);
     var securityConsent = getConsentLevel(currentState.consentState, currentState.config.core.securityConsentId?currentState.config.core.securityConsentId:0);
-    
+    var adUserDataConsent = getConsentLevel(currentState.consentState, currentState.config.core.adsUserDataConsentId?currentState.config.core.adsUserDataConsentId:0);
+    var adPersonalizationConsent = getConsentLevel(currentState.consentState, currentState.config.core.adsPersonalizationConsentId?currentState.config.core.adsPersonalizationConsentId:0);
     const updateData = {
     ad_storage: adConsent ? CONSENT.granted : CONSENT.denied,
     analytics_storage: analyticsConsent ? CONSENT.granted : CONSENT.denied,
+    ad_user_data: adUserDataConsent ? CONSENT.granted : CONSENT.denied,
+    ad_personalization: adPersonalizationConsent ? CONSENT.granted : CONSENT.denied,
     functionality_storage: functionalityConsent ? CONSENT.granted : CONSENT.denied,
     personalization_storage: personalizationConsent? CONSENT.granted :       CONSENT.denied,
     security_storage: securityConsent  ? CONSENT.granted : CONSENT.denied
@@ -94,15 +100,11 @@ const gravitoCurrentState = (currentState) => {
     };
     
     // send updated consents.
-  
     updateConsentState(updateData);
     
     // add consents event into data layer.
-    
     const dataLayerPush = createQueue('dataLayer');
     dataLayerPush({'event': 'grvupdate', 'consents': currentState.consentState});
-    
-  
 };
 
 const onSuccess = () => {
@@ -112,9 +114,8 @@ const onSuccess = () => {
 };
  
 
+let scriptUrl = 'https://cdn.gravito.net/customhtmlscripts/cmpTemplateWrapper.js';
 
-
-let scriptUrl = 'https://gravitocdn.blob.core.windows.net/customhtmlscripts/cmpTemplateWrapper.js';
 
 if (queryPermission('inject_script', scriptUrl)) 
 { 
@@ -122,6 +123,8 @@ if (queryPermission('inject_script', scriptUrl))
   setDefaultConsentState({
     'ad_storage': CONSENT.denied,
     'analytics_storage': CONSENT.denied,
+    'ad_user_data': CONSENT.denied,
+    'ad_personalization': CONSENT.denied,
     'functionality_storage': CONSENT.denied,
     'personalization_storage':  CONSENT.denied,
     'security_storage':CONSENT.denied,
@@ -317,10 +320,6 @@ ___WEB_PERMISSIONS___
               {
                 "type": 1,
                 "string": "https://cdn.gravito.net/customhtmlscripts/*"
-              },
-              {
-                "type": 1,
-                "string": "https://gravitocdn.blob.core.windows.net/customhtmlscripts/*"
               }
             ]
           }
@@ -519,6 +518,68 @@ ___WEB_PERMISSIONS___
                   {
                     "type": 1,
                     "string": "wait_for_update"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "consentType"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "ad_user_data"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "consentType"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "ad_personalization"
                   },
                   {
                     "type": 8,
