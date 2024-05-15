@@ -1,5 +1,5 @@
 homepage: "https://www.gravito.net"
 documentation: "https://www.gravito.net/docs/lightcmp/gtm-template/"
 versions:
-  - sha: d407b91638cf8c6189d91fbbb9dc27d8ddf80f07
+  - sha: 01301dfe98dce04887a62ecc51cc401c0b63aa9a
     changeNotes: Changes to template for adding field description
