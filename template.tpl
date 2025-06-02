@@ -302,7 +302,7 @@ const CONSENT = {
     denied: 'denied',
     granted: 'granted'
 };
-
+let defaultState = {};
 // Set windows scope variables.
 setInWindow("gravitoconfigtoken", data.gravitoconfigtoken, false);
 setInWindow("gravitocmptype", data.cmp_type, false);
@@ -318,6 +318,12 @@ const gravitoCurrentState = (currentState) => {
   if (consentModeEnabled !== false) {
     // send updated consents.
     updateConsentState(currentState.consentState);
+     callInWindow(
+      "addGTagEventToDataLayer",
+      "consent",
+      "update",
+      currentState.consentState
+    );
    // Set data redaction
     let adsDataRedactionValue = true;
     // check if adsDataRedaction is set as dynamic i.e. based on ad_storage consent
@@ -342,6 +348,7 @@ const gravitoCurrentState = (currentState) => {
 };
 
 const onSuccess = () => {
+   callInWindow("addGTagEventToDataLayer", "consent", "default", defaultState);
   // add event listener.
   callInWindow('gravitoAddEventListner', gravitoCurrentState);
   data.gtmOnSuccess();
@@ -352,7 +359,8 @@ const onSuccess = () => {
 gtagSet(gravitoDeveloperId, true);
 
 
-let scriptUrl = 'https://cdn.gravito.net/customhtmlscripts/GTMWrapper.js';
+let scriptUrl =
+  "https://cdn.gravito.net/customhtmlscripts/GTMWrapperWithDataLayerEvents.js";
 
 
 if (queryPermission('inject_script', scriptUrl)) 
@@ -403,6 +411,7 @@ if (queryPermission('inject_script', scriptUrl))
         }
       
         setDefaultConsentState(consentRegionData);
+        defaultState = consentRegionData;
         if (regionObj.region === undefined || regionObj.region.trim() === '')
         {
           hasDefaultState = true;
@@ -501,6 +510,45 @@ ___WEB_PERMISSIONS___
                   {
                     "type": 8,
                     "boolean": false
+                  }
+                ]
+              },
+                {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "addGTagEventToDataLayer"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
                   }
                 ]
               },
