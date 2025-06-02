@@ -2,10 +2,13 @@ homepage: "https://www.gravito.net"
 documentation: "https://docs.gravito.net/Consent_Management/Google_consent_mode/"
 versions:
   #latest version
-  - sha: 8e29c26e59c609837a9af2a611366ef8d558e417
-    changeNotes: Added support for using template for Gravito's different CMP types. Also add support to set default consents for multiple regions.
-  #older version
-  - sha: 7ba37515fbb827227945f8ed29f00f25013140dd
-    changeNotes: Modified Gravito thumbnail and link to template documentation.
-  - sha: 01301dfe98dce04887a62ecc51cc401c0b63aa9a
-    changeNotes: Changes to template for adding field description
+- sha: f4ca77984763edc06fe7a4eb99ec9d2055de001d
+  changeNotes: Changes to  ensures events are available on the client-side via the window.dataLayer object.
+  
+#older version
+- sha: 8e29c26e59c609837a9af2a611366ef8d558e417
+  changeNotes: Added support for using template for Gravito's different CMP types. Also add support to set default consents for multiple regions.
+- sha: 7ba37515fbb827227945f8ed29f00f25013140dd
+  changeNotes: Modified Gravito thumbnail and link to template documentation.
+- sha: 01301dfe98dce04887a62ecc51cc401c0b63aa9a
+  changeNotes: Changes to template for adding field description
