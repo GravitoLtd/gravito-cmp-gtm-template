@@ -50,6 +50,10 @@ ___TEMPLATE_PARAMETERS___
     "displayName": "Gravito CMP type",
     "selectItems": [
       {
+        "value": "gravitoCMPV6",
+        "displayValue": "Gravito CMP(New)"
+      },
+      {
         "value": "lightCMP",
         "displayValue": "Gravito CMP"
       },
@@ -61,6 +65,7 @@ ___TEMPLATE_PARAMETERS___
         "value": "proCMP",
         "displayValue": "Gravito Pro CMP"
       }
+      
     ],
     "simpleValueType": true,
     "defaultValue": "lightCMP",
@@ -360,7 +365,7 @@ gtagSet(gravitoDeveloperId, true);
 
 
 let scriptUrl =
-  "https://cdn.gravito.net/customhtmlscripts/GTMWrapperWithDataLayerEvents.js";
+  "https://cdn.gravito.net/customhtmlscripts/GTMWrapperWithDataLayerEvents_V6.js";
 
 
 if (queryPermission('inject_script', scriptUrl)) 
