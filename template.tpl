@@ -68,7 +68,7 @@ ___TEMPLATE_PARAMETERS___
       
     ],
     "simpleValueType": true,
-    "defaultValue": "lightCMP",
+    "defaultValue": "gravitoCMPV6",
     "help": "Choose the type of CMP have you configured in Gravito\u0027s portal"
   },
   {
@@ -427,6 +427,7 @@ if (queryPermission('inject_script', scriptUrl))
     if(!hasDefaultState)
     {
       setDefaultConsentState({ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', functionality_storage: 'denied', personalization_storage: 'denied', security_storage: 'granted'});
+      defaultState={ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', functionality_storage: 'denied', personalization_storage: 'denied', security_storage: 'granted'};
     }
  }
  // inject gravito script.
