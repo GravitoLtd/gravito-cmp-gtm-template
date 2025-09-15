@@ -2,10 +2,13 @@ homepage: "https://www.gravito.net"
 documentation: "https://docs.gravito.net/Consent_Management/Google_consent_mode/"
 versions:
   #latest version
-- sha: d09509041b93781b931d08cb04fc9cc8fc60c2f2
+- sha: bea9ef14b0d532bc69ec3887bf312889c6604f9d
   changeNotes: Fix issue with default state.
+
   
 #older version
+- sha: d09509041b93781b931d08cb04fc9cc8fc60c2f2
+  changeNotes: Fix issue with default state.
 - sha: 01bc26829a67887abbf64756372362366f2d2204
   changeNotes: Added support for gravito cmp v6.
 - sha: f4ca77984763edc06fe7a4eb99ec9d2055de001d
