@@ -65,7 +65,6 @@ ___TEMPLATE_PARAMETERS___
         "value": "proCMP",
         "displayValue": "Gravito Pro CMP"
       }
-      
     ],
     "simpleValueType": true,
     "defaultValue": "gravitoCMPV6",
@@ -154,7 +153,7 @@ ___TEMPLATE_PARAMETERS___
                 "param": {
                   "type": "SELECT",
                   "name": "default_consent_preferences",
-                  "displayName": "Preferences (functionality_storage and personalization_storage)",
+                  "displayName": "Preferences (functionality_storage)",
                   "selectItems": [
                     {
                       "value": "granted",
@@ -166,7 +165,29 @@ ___TEMPLATE_PARAMETERS___
                     }
                   ],
                   "simpleValueType": true,
-                  "help": "Select default consent state for preference tags",
+                  "help": "Select default consent state for functionality storage",
+                  "defaultValue": "denied"
+                },
+                "isUnique": false
+              },
+              {
+                "param": {
+                  "type": "SELECT",
+                  "name": "default_consent_personalization",
+                  "displayName": "Personalization_Storage",
+                  "macrosInSelect": true,
+                  "selectItems": [
+                    {
+                      "value": "granted",
+                      "displayValue": "Granted"
+                    },
+                    {
+                      "value": "denied",
+                      "displayValue": "Denied"
+                    }
+                  ],
+                  "simpleValueType": true,
+                  "help": "Select default consent state for Personalization Storage",
                   "defaultValue": "denied"
                 },
                 "isUnique": false
@@ -255,6 +276,7 @@ ___TEMPLATE_PARAMETERS___
                 },
                 "isUnique": false
               }
+              
             ],
             "editRowTitle": "Edit region",
             "newRowButtonText": "Add region",
@@ -365,7 +387,7 @@ gtagSet(gravitoDeveloperId, true);
 
 
 let scriptUrl =
-  "https://cdn.gravito.net/customhtmlscripts/GTMWrapperWithDataLayerEvents_V6.js";
+  "https://cdn.gravito.net/customhtmlscripts/GTMWrapperWithDataLayerEvents_V6(updated-11092025).js";
 
 
 if (queryPermission('inject_script', scriptUrl)) 
@@ -389,7 +411,7 @@ if (queryPermission('inject_script', scriptUrl))
             ad_user_data: regObject.default_consent_ad_user_data,
             analytics_storage: regObject.default_consent_analytics_storage,
             functionality_storage: regObject.default_consent_preferences,
-            personalization_storage: regObject.default_consent_preferences,
+            personalization_storage: regObject.default_consent_personalization,
             security_storage: 'granted'
         };
       
@@ -519,7 +541,7 @@ ___WEB_PERMISSIONS___
                   }
                 ]
               },
-                {
+              {
                 "type": 3,
                 "mapKey": [
                   {
@@ -734,7 +756,8 @@ ___WEB_PERMISSIONS___
               {
                 "type": 1,
                 "string": "https://cdn.gravito.net/customhtmlscripts/*"
-              }
+              },
+             
             ]
           }
         }
